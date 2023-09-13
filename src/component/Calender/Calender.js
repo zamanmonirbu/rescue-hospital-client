@@ -8,17 +8,19 @@ const Calender = () => {
   const [value, onChange] = useState(new Date());
   const [onePatient, setOnePatient] = useState([])
   const dateObject = new Date(value);
+  console.log(dateObject);
   const day = dateObject.getDate();
+  // console.log("day",day);
   useEffect(() => {
-    axios.get(`${baseUrl}/date/${day}`)
+    axios.get(`${baseUrl}/find/${day}`)
       .then(result => setOnePatient(result.data))
       .catch((err) => {
         console.log(err);
       })
   }, [day])
   return (
-    <div>
-      <Calendar onChange={onChange} value={value} />
+    <div className='w-full h-full p-10'>
+      <Calendar onChange={onChange} value={value} className="w-1/2 h-52 rounded-xl bg-violet-300  mx-auto w-1/2"/>
       <section class="container mx-auto p-6 font-mono">
         <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
           <div class="w-full overflow-x-auto">
@@ -34,7 +36,7 @@ const Calender = () => {
               </thead>
               <tbody class="bg-white">
                 {
-                  onePatient &&
+                  onePatient?
                   onePatient.map(pt => {
                     return <tr class="text-gray-700">
                       <td class="px-4 py-3 border">
@@ -58,7 +60,7 @@ const Calender = () => {
                       </td>
                       <td> <Link class="bg-green-400 text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark"><button>Edit</button></Link> <Link class="bg-red-400 text-grey-lighter font-bold py-1 px-3 rounded text-xs bg-green hover:bg-green-dark"><button>Delete</button></Link></td>
                     </tr>
-                  })
+                  }):<p>No booking</p>
                 }
               </tbody>
             </table>

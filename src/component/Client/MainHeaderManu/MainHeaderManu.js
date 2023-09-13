@@ -1,4 +1,5 @@
 // import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Head from '../../images/pp.jpg'
 // import { apiContext } from '../../../App';
 // import Slide from '../Slides/Slide';
@@ -37,7 +38,7 @@ const MainHeaderManu = () => {
             <div class="mt-10  w-full flex max-w-md mx-auto lg:mx-0">
                 <div class="flex sm:flex-row flex-col gap-5 w-full">
                     <div>
-                        <button className='px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg'>  Appointment Now</button>
+                       <Link to='/appointment'> <button className='px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg'>  Appointment Now</button></Link>
                     </div>
                 </div>
             </div>
