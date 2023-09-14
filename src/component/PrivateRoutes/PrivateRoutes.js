@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiContext } from '../../App';
 
 
 const PrivateRoutes = (props) => {
@@ -11,9 +12,12 @@ const PrivateRoutes = (props) => {
         if (!login) {
             navigation('/login')
         }
-    })
+    });
+
+    const [user]= useContext(apiContext)
     return (
         <div>
+            <p>DisplayName{user.displayName}</p>
             <Component />
         </div>
     );

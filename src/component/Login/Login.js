@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from '../Auth/app.config'
 import drLoginIn from '../images/loginDr.png'
+import { apiContext } from '../../App';
 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user,setUser]=useState()
+  const [user,setUser]=useState();
+  const {setVerifyUser}=  useContext(apiContext)
 
   const provider = new GoogleAuthProvider();
   const handleGoogleLogin = (event) => {
@@ -19,6 +21,7 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         setUser(user)
+        setVerifyUser(user)
         
       }).catch((error) => {
         const errorMessage = error.message;
@@ -35,11 +38,24 @@ const Login = () => {
   if(user){
     localStorage.setItem('drLogin',true)
 }
-  const navigation=useNavigate()
+// else{
+//   localStorage.clear();
+// }
+const navigation=useNavigate()
+
+
+// if(performance.navigation.type === 1){
+//   localStorage.clear();
+//   console.log("Page has been refreshed");
+// }
+
+
+
+
   useEffect(()=>{
       const login=localStorage.getItem('drLogin')
       if(login){
-          navigation('/')
+       navigation(-1);   
       }
   })
 

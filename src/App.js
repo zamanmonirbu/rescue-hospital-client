@@ -21,6 +21,7 @@ function App() {
   //   }
   // },[location?.state?.from,navigate])
 
+  console.log(verifyUser);
   return (
     <div className="App">
       <apiContext.Provider value={[verifyUser, setVerifyUser]}>
