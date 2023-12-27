@@ -1,138 +1,133 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import google from "../images/google.png";
+import { useLocation, useNavigate } from "react-router-dom";
+import { apiContext } from "../../App";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth } from '../Auth/app.config'
-import drLoginIn from '../images/loginDr.png'
-import { apiContext } from '../../App';
-
+import { auth } from "../../Auth/Firebase/app.config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [user,setUser]=useState();
-  const {setVerifyUser}=  useContext(apiContext)
+  const [user, setUser] = useContext(apiContext);
+  const location = useLocation();
+  const Navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const provider = new GoogleAuthProvider();
-  const handleGoogleLogin = (event) => {
-    event.preventDefault();
-    console.log("Google Form");
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+  const handleGoogleLogin = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
         setUser(user)
-        setVerifyUser(user)
-        
-      }).catch((error) => {
+      })
+      .catch((error) => {
+        const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorMessage);
+        console.log(errorCode,errorMessage)
       });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("Form");
-
+  const provider = new GoogleAuthProvider();
+  const handleGooglePopup = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // const credential = GoogleAuthProvider.credentialFromResult(result);
+        // const token = credential.accessToken;
+        const user = result.user;
+        // console.log(token, user);
+        setUser(user)
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(errorCode, errorMessage, email, credential);
+      });
   };
 
-  if(user){
-    localStorage.setItem('drLogin',true)
-}
-// else{
-//   localStorage.clear();
-// }
-const navigation=useNavigate()
-
-
-// if(performance.navigation.type === 1){
-//   localStorage.clear();
-//   console.log("Page has been refreshed");
-// }
-
-
-
-
-  useEffect(()=>{
-      const login=localStorage.getItem('drLogin')
-      if(login){
-       navigation(-1);   
+  useEffect(() => {
+    if (user) {
+      if (location?.state?.prevUrl) {
+        Navigate(location?.state?.prevUrl);
+      } else {
+        Navigate("/");
       }
-  })
+    }
+  }, [Navigate, location?.state?.prevUrl, user]);
 
   return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-200">
+      <div className="bg-white p-8 rounded shadow-md">
+        <h2 className="text-2xl font-bold mb-8 text-center">Login</h2>
 
-    <div className="flex flex-wrap min-h-screen w-full content-center justify-center bg-gray-200 py-10">
-      <div className="flex shadow-md">
-        <div className="flex flex-wrap content-center justify-center rounded-l-md bg-white" style={{ width: '24rem', height: '32rem' }}>
-          <div className="w-72">
-            <h1 className="text-xl font-semibold">Welcome back</h1>
-            <small className="text-gray-400">Welcome back! Please enter your details</small>
+        <form onSubmit={handleGoogleLogin}>
+          <div className="flex mb-4">
+            <div className="w-1/2 pr-2">
+              <label
+                htmlFor="loginEmail"
+                className="block text-sm font-medium text-gray-600"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="loginEmail"
+                name="email"
+                className="mt-1 p-2 w-full border rounded-md"
+                placeholder="Enter your email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+            </div>
 
-            <form className="mt-4">
-              <div className="mb-3">
-                <label className="mb-2 block text-xs font-semibold">Email</label>
-                <input
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  className="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-1.5 text-gray-500"
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="mb-2 block text-xs font-semibold">Password</label>
-                <input
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                  type="password"
-                  placeholder="*****"
-                  className="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-1.5 text-gray-500"
-                />
-              </div>
-
-              <div className="mb-3 flex flex-wrap content-center">
-                <a href="/register" className="text-xs font-semibold text-purple-700">
-                  Forgot password?
-                </a>
-              </div>
-
-              <div className="mb-3">
-                <button onClick={handleSubmit} className="mb-1.5 block w-full text-center text-white bg-purple-700 hover:bg-purple-900 px-2 py-1.5 rounded-md">
-                  Sign in
-                </button>
-                <button onClick={handleGoogleLogin} className="flex flex-wrap justify-center w-full border border-gray-300 hover:border-gray-500 px-2 py-1.5 rounded-md">
-                  <img
-                    className="w-5 mr-2"
-                    src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA"
-                    alt="Google Logo"
-                  />
-                  Sign in with Google
-                </button>
-              </div>
-            </form>
-
-            <div className="text-center">
-              <span className="text-xs text-gray-400 font-semibold">Don't have an account?</span>
-              <a href="/register" className="text-xs font-semibold text-purple-700">
-                Sign up
-              </a>
+            <div className="w-1/2 pl-2">
+              <label
+                htmlFor="loginPassword"
+                className="block text-sm font-medium text-gray-600"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="loginPassword"
+                name="password"
+                className="mt-1 p-2 w-full border rounded-md"
+                placeholder="Enter your password"
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
             </div>
           </div>
-        </div>
 
-        <div className="flex flex-wrap content-center justify-center rounded-r-md" style={{ width: '24rem', height: '32rem' }}>
-          <img
-            className="w-full h-full bg-center bg-no-repeat bg-cover rounded-r-md"
-            src={drLoginIn}
-            alt="Background"
-          />
-        </div>
+          <button
+            type="submit"
+            className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
+          >
+            Login
+          </button>
+        </form>
+
+        <p className="mt-4 text-sm text-gray-600">
+          New user?{" "}
+          <a href="/user/register" className="text-blue-500 hover:underline">
+            Create a new account
+          </a>
+        </p>
+
+        <hr className="my-6" />
+
+        <button
+          onClick={handleGooglePopup}
+          className="bg-gray-200 flex text-black py-2 px-4 rounded-md hover:bg-gray-400"
+        >
+          <img src={google} alt="google" className="h-6 w-6 mr-2" />{" "}
+          <span>Login with Google</span>
+        </button>
       </div>
-
-
     </div>
-
   );
 };
 
