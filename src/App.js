@@ -10,6 +10,7 @@ import Test from './Auth/Test';
 import DoctorsDataInputForm from './screen/DoctorsDataInputForm';
 import DoctorsInfoDisplay from './screen/ShowDoctors';
 import DoctorsBySpecialist from './component/FilterDoctor/SearchBySpecialty';
+import FinalAppointment from './component/Appointment/FinalAppointment';
 
 export const apiContext = createContext();
 
@@ -26,11 +27,11 @@ function App() {
           <Route path="/doctor/data/input" element={<DoctorsDataInputForm/>} />
           <Route path="/show/doctors" element={<DoctorsInfoDisplay/>} />
           <Route path="/doctor/:specialistCategory" element={<DoctorsBySpecialist/>} />
-          <Route path="/doctor/appointment/:id" element={<Login/>} />
           
           <Route element={<PrivateRoutes/>}>
           <Route path="/admin/page" element={<Admin/>}/>
             <Route path="/appointment" element={<Calender/>}/>
+            <Route path="/doctor/appointment/:doctorId" element={<FinalAppointment/>} />
 
 
           </Route>         

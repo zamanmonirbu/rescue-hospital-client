@@ -15,7 +15,10 @@ const DoctorsBySpecialist = () => {
           where("specialist", "==", specialistCategory)
         );
         const querySnapshot = await getDocs(q);
-        const data = querySnapshot.docs.map((doc) => doc.data());
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data()
+        }));
         setDoctorsData(data);
       } catch (error) {
         console.error("Error fetching doctors data: ", error);
@@ -24,7 +27,7 @@ const DoctorsBySpecialist = () => {
 
     fetchData();
   }, [specialistCategory]);
-console.log(doctorsData)
+// console.log(doctorsData)
   return (
     <div className="bg-gray-100 py-8">
       <h1 className="text-2xl text-center text-green-500 mb-4">

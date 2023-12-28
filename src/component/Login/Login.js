@@ -13,17 +13,28 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    // Check if user data exists in local storage
+    const storedUserData = localStorage.getItem("userDetails");
+    if (storedUserData) {
+      const parsedUser = JSON.parse(storedUserData);
+      setUser(parsedUser);
+    }
+  }, [setUser]);
+
   const handleGoogleLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        setUser(user)
+        const jsonString = JSON.stringify(user);
+        localStorage.setItem("userDetails", jsonString);
+        setUser(user);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode,errorMessage)
+        console.log(errorCode, errorMessage);
       });
   };
 
@@ -31,22 +42,30 @@ const Login = () => {
   const handleGooglePopup = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
-        // const credential = GoogleAuthProvider.credentialFromResult(result);
-        // const token = credential.accessToken;
         const user = result.user;
-        // console.log(token, user);
-        setUser(user)
+        const jsonString = JSON.stringify(user);
+        localStorage.setItem("userDetails", jsonString);
+        setUser(user);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        console.log(errorCode, errorMessage, email, credential);
+        console.log(errorCode, errorMessage);
       });
   };
 
   useEffect(() => {
+    if (user) {
+      if (location?.state?.prevUrl) {
+        Navigate(location?.state?.prevUrl);
+      } else {
+        Navigate("/");
+      }
+    }
+  }, [Navigate, location?.state?.prevUrl, user]);
+
+  useEffect(() => {
+
     if (user) {
       if (location?.state?.prevUrl) {
         Navigate(location?.state?.prevUrl);
