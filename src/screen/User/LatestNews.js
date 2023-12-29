@@ -8,22 +8,22 @@ const LatestNews = () => {
   const initialNews = [
     {
       id: 1,
-      title: 'Kolakhet Hospital Unveils Advanced Medical Wing for Enhanced Patient Care',
-      content: 'In a significant stride toward excellence, Kolakhet Hospital proudly introduces its new medical wing designed to elevate patient care standards. The state-of-the-art facility incorporates cutting-edge technology, spacious patient rooms, and advanced medical equipment. This expansion reaffirms our commitment to providing top-notch healthcare services, ensuring the well-being of our community.',
+      title: 'Rescue Hospital Unveils Advanced Medical Wing for Enhanced Patient Care',
+      content: 'In a significant stride toward excellence, Rescue Hospital proudly introduces its new medical wing designed to elevate patient care standards. The state-of-the-art facility incorporates cutting-edge technology, spacious patient rooms, and advanced medical equipment. This expansion reaffirms our commitment to providing top-notch healthcare services, ensuring the well-being of our community.',
       date: 'September 5, 2023',
       image: i4,
     },
     {
       id: 2,
-      title: 'Pioneering Research Initiatives at Kolakhet Hospital',
-      content: 'Kolakhet Hospital embarks on groundbreaking research initiatives aimed at advancing medical knowledge and improving patient outcomes. Our dedicated team of researchers and healthcare professionals collaborates on innovative studies, exploring new treatments, and contributing to the global healthcare landscape. Stay tuned for updates on our transformative research endeavors.',
+      title: 'Pioneering Research Initiatives at Rescue Hospital',
+      content: 'Rescue Hospital embarks on groundbreaking research initiatives aimed at advancing medical knowledge and improving patient outcomes. Our dedicated team of researchers and healthcare professionals collaborates on innovative studies, exploring new treatments, and contributing to the global healthcare landscape. Stay tuned for updates on our transformative research endeavors.',
       date: 'September 12, 2023',
       image: i5,
     },
     {
       id: 3,
       title: 'Celebrating a Decade of Compassionate Healthcare Excellence',
-      content: 'As we mark a decade of service, Kolakhet Hospital reflects on a journey of unwavering commitment to compassionate healthcare. From our humble beginnings to becoming a trusted healthcare institution, we express gratitude to our dedicated staff, supportive community, and valued patients. Here\'s to a decade of healing, growth, and continued excellence.',
+      content: 'As we mark a decade of service, Rescue Hospital reflects on a journey of unwavering commitment to compassionate healthcare. From our humble beginnings to becoming a trusted healthcare institution, we express gratitude to our dedicated staff, supportive community, and valued patients. Here\'s to a decade of healing, growth, and continued excellence.',
       date: 'September 20, 2023',
       image: i6,
     }

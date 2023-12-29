@@ -6,9 +6,6 @@ import SevenDoctorsDisplay from "../../component/User/DoctorDisplay/SevenDoctors
 
 const Doctors = () => {
   const [doctorsData, setDoctorsData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
   useEffect(() => {
     const fetchSevenDoctors = async () => {
       try {
@@ -18,31 +15,18 @@ const Doctors = () => {
           limit(7)
         );
         const querySnapshot = await getDocs(q);
-
         const data = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
         setDoctorsData(data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching doctors data: ", error);
-        setError("Error fetching data. Please try again later.");
-        setLoading(false);
       }
     };
 
     fetchSevenDoctors();
   }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
-  }
-
 
   return (
     <div
@@ -50,7 +34,6 @@ const Doctors = () => {
       className="section relative pt-20 pb-8 md:pt-16 md:pb-0 bg-gray-100"
     >
       <div className="container xl:max-w-6xl mx-auto px-4">
-        {/* Heading start */}
         <header className="text-center mx-auto mb-12 lg:px-20">
           <h2 className="text-2xl leading-normal mb-2 font-bold text-black">
             Our Doctors
@@ -61,7 +44,7 @@ const Doctors = () => {
           </p>
         </header>
         <div className="flex flex-wrap flex-row -mx-4 text-center">
-          {doctorsData.map((doctor,index) => (
+          {doctorsData.map((doctor, index) => (
             <SevenDoctorsDisplay key={index} doctor={doctor} />
           ))}
           <div
@@ -75,35 +58,34 @@ const Doctors = () => {
               animationName: "fadeInUp",
             }}
           >
-          <Link to="/show/doctors">
-          <div className="py-8 px-6 mb-12 bg-gray-50 border-b border-gray-100 transform transition duration-300 ease-in-out hover:-translate-y-2">
-              <div className="mb-4 rounded-full overflow-hidden mx-auto">
-                <svg
-                  class="w-6 h-6 text-gray-800 dark:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg>
+            <Link to="/show/doctors">
+              <div className="py-8 px-6 mb-12 bg-gray-50 border-b border-gray-100 transform transition duration-300 ease-in-out hover:-translate-y-2">
+                <div className="mb-4 rounded-full overflow-hidden mx-auto">
+                  <svg
+                    class="w-6 h-6 text-gray-800 dark:text-white"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-lg leading-normal mb-2 font-semibold text-black">
+                  See More
+                </h3>
+                <p className="text-gray-500">
+                  Explore additional doctors.If need you more information about
+                  our Doctors
+                </p>
               </div>
-              <h3 className="text-lg leading-normal mb-2 font-semibold text-black">
-                See More
-              </h3>
-              <p className="text-gray-500">
-                Explore additional doctors.If need you more information about
-                our Doctors
-              </p>
-            </div>
-          </Link>
-           
+            </Link>
           </div>
         </div>
       </div>

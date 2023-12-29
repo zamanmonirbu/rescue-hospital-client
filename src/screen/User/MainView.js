@@ -46,8 +46,6 @@ const MainView = () => {
               </div>
             </div>
           </div>
-
-          {/* <Slide/> */}
           <div class="flex flex-1 lg:w-1/2 lg:h-auto relative lg:max-w-none lg:mx-0 mx-auto max-w-3xl">
             <img
               src={Head}

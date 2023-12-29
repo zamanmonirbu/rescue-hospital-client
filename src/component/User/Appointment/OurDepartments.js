@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Back from "../../assets/images/previous.png";
 const OurDepartments = () => {
   return (
     <div
@@ -8,12 +7,6 @@ const OurDepartments = () => {
       className=" section relative pt-20 pb-8 md:pt-16 md:pb-0 bg-gray-200"
     >
       <div className="container xl:max-w-6xl mx-auto px-4">
-        <div className="w-8">
-          {" "}
-          <Link to="/">
-            <img src={Back} alt="" className="h-6 w-6" />
-          </Link>
-        </div>
         <h2 className="text-2xl leading-normal mb-2 font-bold text-black text-center">
           Which Sector Doctor You Need?
         </h2>

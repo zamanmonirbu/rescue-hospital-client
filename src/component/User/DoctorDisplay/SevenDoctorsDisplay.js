@@ -15,7 +15,6 @@ const SevenDoctorsDisplay = ({doctor}) => {
       <Link to={`doctor/${doctor.name}/${doctor.id}`}>
       <div className="py-8 px-6 mb-12 bg-gray-50 border-b border-gray-100 transform transition duration-300 ease-in-out hover:-translate-y-2">
         <div className="mb-4 rounded-full overflow-hidden ">
-          {/* Doctor image */}
           <img
             src={doctor.drImage}
             alt="Doctor"

@@ -7,9 +7,7 @@ const ContactUsForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can implement your form submission logic here
     console.log('Form submitted:', { name, email, message });
-    // Reset form fields
     setName('');
     setEmail('');
     setMessage('');

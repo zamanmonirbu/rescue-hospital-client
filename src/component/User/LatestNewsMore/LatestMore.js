@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { initialNews } from '../NewsData/NewsData';
+import Footer from '../Footer/Footer';
+import Navbar from '../Navbar/Navbar';
 
 
 const LatestNewsSection = () => {
@@ -16,7 +18,9 @@ const LatestNewsSection = () => {
   };
 
   return (
-    <div className="section relative pt-16 pb-16 bg-gray-100">
+    <>
+      <Navbar/>
+      <div className="section relative pt-16 pb-16 bg-gray-100">
       <div className="container xl:max-w-6xl mx-auto px-4">
         <h2 className="text-2xl leading-normal mb-6 font-bold text-black text-center">Our Latest News</h2>
         <div className="flex flex-wrap -mx-4">
@@ -58,7 +62,11 @@ const LatestNewsSection = () => {
           ))}
         </div>
       </div>
+     
     </div>
+    <Footer/>
+    </>
+   
   );
 };
 

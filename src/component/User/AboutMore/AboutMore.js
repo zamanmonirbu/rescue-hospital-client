@@ -2,6 +2,8 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Footer from "../Footer/Footer";
+import Navbar from "../Navbar/Navbar";
 
 const AboutMore = () => {
   const sliderSettings = {
@@ -21,7 +23,10 @@ const AboutMore = () => {
   ];
 
   return (
-    <div className="mt-8">
+   
+    <>
+      <Navbar/>
+      <div className="mt-8">
       <Slider {...sliderSettings}>
         {imageUrls.map((imageUrl, index) => (
           <div key={index}>
@@ -33,8 +38,6 @@ const AboutMore = () => {
           </div>
         ))}
       </Slider>
-
-      {/* Section about Our Hospital */}
       <div className="mt-8 p-4 bg-gray-100">
         <h2 className="text-2xl font-semibold mt-10 text-center text-red-500">Our Hospital</h2>
         <p className="p-16 text-justify">
@@ -81,9 +84,10 @@ const AboutMore = () => {
           to serving you with the highest standards of medical care and
           compassion.
         </p>
-        {/* Add more content about your hospital */}
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

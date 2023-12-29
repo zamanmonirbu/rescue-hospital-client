@@ -1,1 +1,0 @@
-export const baseUrl='https://hospital-backend-monir.onrender.com/'

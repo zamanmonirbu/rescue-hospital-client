@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import {collection,addDoc} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../Auth/Firebase/app.config";
- 
+import { useNavigate } from "react-router-dom";
 
 const DoctorsDataInputForm = () => {
+  const navigate = useNavigate();
   const [doctorInfo, setDoctorInfo] = useState({
     name: "",
     specialist: "",
-    age: (""),
+    age: "",
     email: "",
     experience: "",
     drImage: "",
@@ -43,22 +44,25 @@ const DoctorsDataInputForm = () => {
     handleTimeChange(day, field, time);
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const doctorInfoSave = await addDoc(collection(db, "doctors"), doctorInfo);
-        // console.log("Document written with ID: ", doctorInfoSave.id);
-        if(doctorInfoSave.id){
-            alert("Dr Data Inserted")
-        }
-      } catch (error) {
-        console.error("Error adding document: ", error);
+      const doctorInfoSave = await addDoc(
+        collection(db, "doctors"),
+        doctorInfo
+      );
+      if (doctorInfoSave.id) {
+        alert("Dr Data Inserted");
+        navigate("/admin/page");
       }
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
   };
 
   return (
     <div className="bg-gray-100 py-8 ">
-      <h1 className="text-2xl text-center text-red-500 mb-4">Doctor's Info</h1>
+      <h1 className="text-2xl text-center text-red-500 mb-4">Add A Doctor</h1>
       <div className="max-w-xl mx-auto p-4 border rounded-md shadow-lg">
         <label>Name:</label>
         <input

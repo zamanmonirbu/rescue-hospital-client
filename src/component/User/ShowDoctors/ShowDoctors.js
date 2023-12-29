@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { db } from "../../../Auth/Firebase/app.config";
+import Footer from "../Footer/Footer";
 
 const AdminShowDoctors = () => {
   const [doctorsData, setDoctorsData] = useState([]);
@@ -92,6 +93,7 @@ const AdminShowDoctors = () => {
           </div>
         ))}
       </div>
+      <Footer/>
     </div>
   );
 };

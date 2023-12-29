@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../Auth/Firebase/app.config";
 import { Link } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
 import Loading from "../../SideEffects/Loading";
 
-const GetAllDoctor = () => {
+const OurDoctorFor = () => {
   const [doctorsData, setDoctorsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,19 +28,19 @@ const GetAllDoctor = () => {
 
   return (
     <>
-      <Navbar />
       {loading ? <Loading /> : null}
 
       <div className="bg-gray-100 py-8">
         <h1 className="text-2xl text-center text-red-500 mb-4">
-          All Doctors Information
+         Available Doctors Are Here
         </h1>
         <div className="max-w-[90%] mx-auto grid sm:grid-cols-3 gap-4 ">
           {doctorsData.map((doctor, index) => (
-            <div key={index} className="p-4 border rounded-md shadow-lg ">
-              <h2 className="text-xl text-green-500 mb-2 text-center">
-                {doctor.name}
-              </h2>
+            <div
+              key={index}
+              className="p-4 border rounded-md shadow-lg "
+            >
+              <h2 className="text-xl text-green-500 mb-2 text-center">{doctor.name}</h2>
               <img
                 src={doctor.drImage}
                 alt={`Dr ${doctor.name}`}
@@ -70,7 +69,7 @@ const GetAllDoctor = () => {
                   {doctor.fees} -/৳
                 </p>
               </div>
-
+             
               <div className="text-center">
                 {" "}
                 <Link to={`/doctor/${doctor.name}/${doctor.id}`}>
@@ -92,4 +91,4 @@ const GetAllDoctor = () => {
   );
 };
 
-export default GetAllDoctor;
+export default OurDoctorFor;

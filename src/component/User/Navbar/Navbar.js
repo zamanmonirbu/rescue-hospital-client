@@ -1,32 +1,65 @@
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { apiContext } from '../../../App';
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { apiContext } from "../../../App";
 
-const Navigation = () => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-const [user]=useContext(apiContext)
+  const [user] = useContext(apiContext);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-console.log(user)
+
   return (
     <nav className="bg-gray-900 ">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between py-2">
           <div className="flex items-center">
-            <img src="https://img.icons8.com/color/48/doctor-male--v1.png" alt="" />
-            <Link to="/" className="text-white font-semibold text-xl">Rescue Hospital</Link>
+            <img
+              src="https://img.icons8.com/color/48/doctor-male--v1.png"
+              alt=""
+            />
+            <Link to="/" className="text-white font-semibold text-xl">
+              Rescue Hospital
+            </Link>
           </div>
           <div className="hidden md:flex space-x-4">
-            <Link to="/" className="text-gray-300 hover:text-white">Home</Link>
-            <Link to="/appointment" className="text-gray-300 hover:text-white">Appointment</Link>
-            <Link to="/show/doctors" className="text-gray-300 hover:text-white">Doctors</Link>
-            <Link to="/admin/page" className="text-gray-300 hover:text-white">admin</Link>
-           
-            {
-              user?(<img src={user.photoURL} alt='navImage' className='h-8 w-8 rounded-full'/>):(<div><Link to="/user/login" className="text-gray-300 hover:text-white">Login</Link>  <Link to="/user/register" className="text-gray-300 hover:text-white">Register</Link>
-              </div> )
-            }
+            <Link to="/" className="text-gray-300 hover:text-white">
+              Home
+            </Link>
+            <Link to="/appointment" className="text-gray-300 hover:text-white">
+              Appointment
+            </Link>
+            <Link to="/show/doctors" className="text-gray-300 hover:text-white">
+              Doctors
+            </Link>
+            <Link to="/admin/page" className="text-gray-300 hover:text-white">
+              admin
+            </Link>
+
+            {user.photoURL ? (
+              <img
+                src={user.photoURL}
+                alt="navImage"
+                className="h-8 w-8 rounded-full"
+              />
+            ) : user.email ? (
+              <p className="text-white border rounded px-1 ">{user.email}</p>
+            ) : (
+              <div>
+                <Link
+                  to="/user/login"
+                  className="text-gray-300 hover:text-white"
+                >
+                  Login
+                </Link>{" "}
+                <Link
+                  to="/user/register"
+                  className="text-gray-300 hover:text-white"
+                >
+                  Register
+                </Link>
+              </div>
+            )}
           </div>
           <div className="md:hidden">
             <button
@@ -52,14 +85,41 @@ console.log(user)
           </div>
         </div>
         {isMenuOpen && (
-          <div className="md:hidden space-y-4">
-            <Link to="/" className="block text-gray-300 hover:text-white">Home</Link>
-            <Link to="/services" className="block text-gray-300 hover:text-white">Services</Link>
-            <Link to="/doctors" className="block text-gray-300 hover:text-white">Doctors</Link>
-            <Link to="/contact" className="block text-gray-300 hover:text-white">Contact Us</Link>
-            <Link to="/user/login" className="block text-gray-300 hover:text-white">Login</Link>
-            <Link to="/user/register" className="block text-gray-300 hover:text-white">Register</Link>
+          <div className="md:hidden space-y-1 text-center p-1">
+            <Link to="/" className="block text-gray-100 hover:text-black hover:bg-slate-200 hover:p-1  hover:font-semibold p-1 bg-gray-500 ">
+              Home
+            </Link>
             
+            <Link
+              to="/appointment"
+             className="block text-gray-100 hover:text-black hover:bg-slate-200 hover:p-1  hover:font-semibold my-2 p-1 bg-gray-500 "
+            >
+              Appointment
+            </Link>
+            <Link
+              to="/show/doctors"
+             className="block text-gray-100 hover:text-black hover:bg-slate-200 hover:p-1  hover:font-semibold my-2 p-1 bg-gray-500 "
+            >
+              Doctors
+            </Link>
+            <Link
+              to="/admin/page"
+             className="block text-gray-100 hover:text-black hover:bg-slate-200 hover:p-1  hover:font-semibold my-2 p-1 bg-gray-500 "
+            >
+              Admin
+            </Link>
+            <Link
+              to="/user/login"
+             className="block text-gray-100 hover:text-black hover:bg-slate-200 hover:p-1  hover:font-semibold my-2 p-1 bg-gray-500 "
+            >
+              Login
+            </Link>
+            <Link
+              to="/user/register"
+             className="block text-gray-100 hover:text-black hover:bg-slate-200 hover:p-1  hover:font-semibold my-2 p-1 bg-gray-500 "
+            >
+              Register
+            </Link>
           </div>
         )}
       </div>
@@ -67,8 +127,4 @@ console.log(user)
   );
 };
 
-export default Navigation;
-
-
-
-
+export default Navbar;
