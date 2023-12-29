@@ -15,15 +15,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    // Check if user data exists in local storage
-    const storedUserData = localStorage.getItem("userDetails");
-    if (storedUserData) {
-      const parsedUser = JSON.parse(storedUserData);
-      setUser(parsedUser);
-    }
-  }, [setUser]);
-
   const handleGoogleLogin = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)

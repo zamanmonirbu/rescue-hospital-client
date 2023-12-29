@@ -22,10 +22,10 @@ console.log(user)
             <Link to="/appointment" className="text-gray-300 hover:text-white">Appointment</Link>
             <Link to="/show/doctors" className="text-gray-300 hover:text-white">Doctors</Link>
             <Link to="/admin/page" className="text-gray-300 hover:text-white">admin</Link>
-            <Link to="/user/login" className="text-gray-300 hover:text-white">Login</Link>
-            <Link to="/user/register" className="text-gray-300 hover:text-white">Register</Link>
+           
             {
-              user?(<p>{user.email}</p>):(<Link to="/user/login" className="text-gray-300 hover:text-white">Login</Link>)
+              user?(<img src={user.photoURL} alt='navImage' className='h-8 w-8 rounded-full'/>):(<div><Link to="/user/login" className="text-gray-300 hover:text-white">Login</Link>  <Link to="/user/register" className="text-gray-300 hover:text-white">Register</Link>
+              </div> )
             }
           </div>
           <div className="md:hidden">

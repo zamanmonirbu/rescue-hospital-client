@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import appointment from '../../component/images/medical-appointment.png'
-import doctors from '../../component/images/doctorHeader.jpg'
-import admins from '../../component/images/admin.png'
-import statistics from '../../component/images/statistics.png'
-import patients from '../../component/images/patients.png'
-import DoctorsInfoDisplay from '../../component/User/ShowDoctors/ShowDoctors';
+import appointment from '../../component/assets/images/medical-appointment.png'
+import doctors from '../../component/assets/images/doctorHeader.jpg'
+import admins from '../../component/assets/images/admin.png'
+import statistics from '../../component/assets/images/statistics.png'
+import patients from '../../component/assets/images/patients.png'
+import DoctorsInfoDisplay from './DoctorsByAdmin';
+
 
 const Admin = () => {
   return (

@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Admin from "./screen/Admin/AdminHome";
 import MainDiv from "./component/User/MainDiv/MainDiv";
@@ -20,6 +20,15 @@ export const apiContext = createContext();
 
 function App() {
   const [verifyUser, setVerifyUser] = useState(false);
+
+  useEffect(() => {
+    const storedUserData = localStorage.getItem("userDetails");
+    if (storedUserData) {
+      const parsedUser = JSON.parse(storedUserData);
+      setVerifyUser(parsedUser);
+    }
+  }, [setVerifyUser]);
+  
   return (
     <div className="App">
       <apiContext.Provider value={[verifyUser, setVerifyUser]}>
