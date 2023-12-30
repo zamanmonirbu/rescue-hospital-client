@@ -67,13 +67,11 @@ const AppointmentFinal = () => {
       };
 
       const appointmentsCollectionRef = collection(db, "appointments");
-      // await addDoc(appointmentsCollectionRef, appointmentData);
       const saveAppointment=await addDoc(appointmentsCollectionRef, appointmentData);
       if(saveAppointment.id){
         alert("Appointment Successfully Done")
         navigate('/');
       }
-      // console.log("Appointment saved successfully!",saveAppointment);
     } catch (error) {
       console.error("Error saving appointment: ", error);
     }

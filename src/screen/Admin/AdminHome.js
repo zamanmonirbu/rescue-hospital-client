@@ -63,7 +63,7 @@ const Admin = () => {
   };
 
   return (
-    <div class="flex">
+    <div class="flex w-[80%] md:w-full">
       <div class="flex w-2/5 md:w-1/4 h-screen bg-white">
         <div class="mx-auto py-10">
           <h1 class="text-2xl font-bold mb-10 cursor-pointer text-[#EC5252] duration-150">
@@ -173,7 +173,7 @@ const Admin = () => {
             )}
           </div>
         </nav>
-        <div class="w-full variableDiv" style={{ overflow: "auto" }}>
+        <div class=" w-full variableDiv" style={{ overflow: "auto" }}>
           {renderSelectedComponent()}
         </div>
       </main>
