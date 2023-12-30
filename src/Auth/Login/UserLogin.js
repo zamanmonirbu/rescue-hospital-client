@@ -7,6 +7,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../Firebase/app.config";
 import Footer from "../../component/User/Footer/Footer";
 import Navbar from "../../component/User/Navbar/Navbar";
+import Error from "../../component/SideEffects/Error";
 
 const Login = () => {
   const [user, setUser] = useContext(apiContext);
@@ -14,6 +15,7 @@ const Login = () => {
   const Navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error,setError]=useState(false)
 
   const handleGoogleLogin = (e) => {
     e.preventDefault();
@@ -28,6 +30,7 @@ const Login = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        setError(true)
       });
   };
 
@@ -72,6 +75,7 @@ const Login = () => {
       <Navbar />
       <div className="flex items-center justify-center min-h-screen bg-gray-200">
         <div className="bg-white p-8 rounded shadow-md">
+        {error && <Error/>}
           <h2 className="text-2xl font-bold mb-8 text-center">Login</h2>
           <form onSubmit={handleGoogleLogin}>
             <div className="flex mb-4">
