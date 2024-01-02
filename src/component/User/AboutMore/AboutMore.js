@@ -41,7 +41,7 @@ const AboutMore = () => {
       <div className="mt-8 p-4 bg-gray-100">
         <h2 className="text-2xl font-semibold mt-10 text-center text-red-500">Our Hospital</h2>
         <p className="p-16 text-justify">
-          Our state-of-the-art facility, Kolakhet Hospital, is dedicated to
+          Our state-of-the-art facility, Rescue Hospital, is dedicated to
           providing exceptional healthcare services. Our commitment extends
           across various medical disciplines, ensuring that our patients receive
           comprehensive and personalized care. Our team comprises skilled
@@ -53,14 +53,14 @@ const AboutMore = () => {
           dedicated team prepared to deliver rapid and life-saving
           interventions. This commitment to urgent care reflects our mission to
           be a reliable resource for the community in times of medical crises.
-          Beyond emergency care, Kolakhet Hospital offers a wide spectrum of
+          Beyond emergency care, Rescue Hospital offers a wide spectrum of
           medical services designed to address diverse healthcare needs. Whether
           it's routine check-ups, specialized treatments, or surgical
           procedures, our medical professionals strive to provide top-notch
           services with a focus on patient safety, comfort, and positive
           outcomes. Your health is our priority, and we are honored to serve you
           with excellence and compassion. Our multidisciplinary approach at
-          Kolakhet Hospital ensures a seamless continuum of care for our
+          Rescue Hospital ensures a seamless continuum of care for our
           patients. We prioritize preventive healthcare through routine
           check-ups and health education programs to empower individuals with
           the knowledge to make informed decisions about their well-being. In
@@ -77,7 +77,7 @@ const AboutMore = () => {
           healthcare providers and patients. Our commitment to excellence
           extends beyond medical treatments; we are dedicated to promoting
           overall wellness and supporting individuals on their health journeys.
-          Kolakhet Hospital stands as a beacon of healthcare excellence,
+          Rescue Hospital stands as a beacon of healthcare excellence,
           combining advanced medical technologies with compassionate care to
           meet the diverse healthcare needs of our community. Your health and
           satisfaction are at the forefront of our mission, and we look forward

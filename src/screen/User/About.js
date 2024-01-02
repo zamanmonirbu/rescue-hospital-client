@@ -22,7 +22,7 @@ const About = () => {
             healthcare professionals. From skilled surgeons to attentive nurses,
             from experienced specialists to friendly administrative staff, every
             member of our team is committed to ensuring the well-being and
-            comfort of our patients. At Kolakhet Hospital, we offer a
+            comfort of our patients. At rescue Hospital, we offer a
             comprehensive range of medical services, including but not limited
             to: Emergency Care: Our 24/7 emergency department is always ready to
             provide rapid and life-saving care to those in need.
