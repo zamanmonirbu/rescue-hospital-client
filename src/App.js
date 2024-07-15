@@ -17,6 +17,8 @@ import AdminLogin from "./Auth/Login/AdminLogin";
 import DoctorsByAdmin from "./screen/Admin/DoctorsByAdmin";
 import UpdateDoctorInfos from "./screen/Admin/UpdateDoctorInfos";
 import GetAllDoctor from "./component/User/GetAllDoctor/GetAllDoctor";
+import DonationForm from "./component/BloodDonation/DonationForm";
+import BloodNeedForm from "./component/BloodDonation/BloodNeedForm ";
 
 export const apiContext = createContext();
 
@@ -44,6 +46,8 @@ function App() {
           <Route path="/show/doctors" element={<GetAllDoctor/>} />
           <Route path="/hospital/about/more" element={<AboutMore />} />
           <Route path="/see/more/latest/news" element={<LatestNewsSection />} />
+          <Route path="/blood/donation" element={<DonationForm/>} />
+          <Route path="/blood/need" element={<BloodNeedForm/>} />
           <Route path="/test" element={<Test />} />
 
 

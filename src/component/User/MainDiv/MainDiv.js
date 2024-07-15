@@ -7,12 +7,14 @@ import ContactUsSection from '../ContactUs/Contact';
 import Footer from '../Footer/Footer';
 import MainView from '../../../screen/User/MainView';
 import Navbar from '../Navbar/Navbar';
+import BloodDonation from '../../BloodDonation/BloodDonation';
 
 const MainDiv = () => {
     return (
         <div>
             <Navbar/>
             <MainView />
+            <BloodDonation/>
             <Services/>
             <OurDoctorsSection/>
             <AboutHospitalSection/>
