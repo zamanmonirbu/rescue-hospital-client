@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiContext } from "../../../App";
+import userImg from '../../../component/assets/images/profile.png'
+import admin from '../../../component/assets/images/admin.png'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,31 +35,32 @@ const Navbar = () => {
               Doctors
             </Link>
             <Link to="/admin/page" className="text-gray-300 hover:text-white">
-              admin
+            <img src={admin} alt="" className="h-8 w-8 rounded-full"  title="Admin Profile" />
             </Link>
 
-            {user.photoURL ? (
+            {
+            user?.photoURL ?(
               <img
-                src={user.photoURL}
+                src={user?.photoURL}
                 alt="navImage"
-                className="h-8 w-8 rounded-full"
+                className="h-6 w-6 rounded-full"
+                title="User Profile"
               />
-            ) : user.email ? (
-              <p className="text-white border rounded px-1 ">{user.email}</p>
-            ) : (
+            ) :  (
               <div>
                 <Link
                   to="/user/login"
                   className="text-gray-300 hover:text-white"
                 >
-                  Login
-                </Link>{" "}
+                  <img src={userImg} alt="" className="h-8 w-8 rounded-full"  title="User Profile" />
+                </Link>
+                {/* {" "}
                 <Link
                   to="/user/register"
                   className="text-gray-300 hover:text-white"
                 >
                   Register
-                </Link>
+                </Link> */}
               </div>
             )}
           </div>

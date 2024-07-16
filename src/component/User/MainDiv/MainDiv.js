@@ -8,6 +8,7 @@ import Footer from '../Footer/Footer';
 import MainView from '../../../screen/User/MainView';
 import Navbar from '../Navbar/Navbar';
 import BloodDonation from '../../BloodDonation/BloodDonation';
+import FAQAccordionData from '../../FAQ/FAQAccordionData';
 
 const MainDiv = () => {
     return (
@@ -19,6 +20,7 @@ const MainDiv = () => {
             <OurDoctorsSection/>
             <AboutHospitalSection/>
             <LatestNewsSection/>
+            <FAQAccordionData/>
             <ContactUsSection/>
             <Footer/>
         </div>

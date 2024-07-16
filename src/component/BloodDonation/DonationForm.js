@@ -35,7 +35,7 @@ const DonationForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
+    console.log(formData);  
     try {
       await axios.post(`${baseUrl}/api/donation`, formData); 
     } catch (error) {

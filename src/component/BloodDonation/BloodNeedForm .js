@@ -3,7 +3,7 @@ import axios from 'axios';
 import bdDistricts from './bdDistricts';
 import Navbar from '../User/Navbar/Navbar';
 import { baseUrl } from '../../BaseURL';
-
+import { format, differenceInDays } from 'date-fns';
 
 const BloodNeedForm = () => {
   const [selectedDistrict, setSelectedDistrict] = useState('');
@@ -36,14 +36,28 @@ const BloodNeedForm = () => {
     }
   };
 
+  const formatLastDonationDate = (dateString) => {
+    const date = new Date(dateString);
+    const formattedDate = format(date, 'dd-MMMM-yyyy');
+    const daysAgo = differenceInDays(new Date(), date);
+    return `${formattedDate}(${daysAgo} days ago)`;
+  };
+
+  const physicalProblemOrNot = (e) => {
+    if (e === "true") {
+      return "Yes";
+    }
+    return "No";
+  };
+
   return (
     <>
       <Navbar />
-      <div className="p-8 max-w-md mx-auto bg-gray-200 rounded-xl shadow-md space-y-6 mt-10">
+      <div className="p-8 max-w-3xl mx-auto bg-gray-200 rounded-xl shadow-md space-y-6 mt-10">
         <h2 className="text-2xl font-bold text-center">Search for Blood</h2>
         <form onSubmit={handleSearch}>
           <div className="flex flex-wrap gap-4">
-            <div className="flex-1">
+            <div className="flex-1 min-w-[200px]">
               <label className="block text-sm font-medium text-gray-700">District</label>
               <select
                 value={selectedDistrict}
@@ -56,7 +70,7 @@ const BloodNeedForm = () => {
                 ))}
               </select>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 min-w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Sub-district</label>
               <select
                 value={selectedSubDistrict}
@@ -69,7 +83,7 @@ const BloodNeedForm = () => {
                 ))}
               </select>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 min-w-[200px]">
               <label className="block text-sm font-medium text-gray-700">Blood Group</label>
               <select
                 value={selectedBloodGroup}
@@ -88,7 +102,7 @@ const BloodNeedForm = () => {
               </select>
             </div>
             <div className="flex-1 flex items-end">
-              <button type="submit" className="mt-4 w-full px-4 py-4 bg-green-600 text-white rounded-md hover:bg-green-700">
+            <button type="submit" className="mt-4 w-full px-4 py-4 bg-green-600 text-white rounded-md hover:bg-green-700">
                 Search
               </button>
             </div>
@@ -96,41 +110,56 @@ const BloodNeedForm = () => {
         </form>     
       </div>
 
-      <div className="w-1/2 m-auto">
-        {searched && searchResults.length > 0 && (
-          <div className="mt-16">
-            <h3 className="text-lg font-semibold text-center">Donors Found:</h3>
-            <table className="mt-2 w-full border-collapse border border-gray-200">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="border border-gray-300 px-4 py-2">Serial</th>
-                  <th className="border border-gray-300 px-4 py-2">Name</th>
-                  <th className="border border-gray-300 px-4 py-2">Blood Group</th>
-                  <th className="border border-gray-300 px-4 py-2">District</th>
-                  <th className="border border-gray-300 px-4 py-2">Sub-district</th>
+     <div className="w-3/4 mx-auto">
+      {searched && searchResults.length > 0 && (
+        <div className="mt-8 overflow-x-auto">
+          <h3 className="text-lg font-semibold text-center mb-4">Donors Found:</h3>
+          <div className="shadow-md rounded-md">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-900 text-white">
+                <tr>
+                  <th scope="col" className="px-4 py-2 text-left text-sm font-medium">Serial</th>
+                  <th scope="col" className="px-4 py-2 text-left text-sm font-medium">Name</th>
+                  <th scope="col" className="px-4 py-2 text-left text-sm font-medium">Blood Group</th>
+                  <th scope="col" className="px-4 py-2 text-left text-sm font-medium">Age</th>
+                  <th scope="col" className="px-4 py-2 text-left text-sm font-medium">District</th>
+                  <th scope="col" className="px-4 py-2 text-left text-sm font-medium">Sub-district</th>
+                  <th scope="col" className="px-4 py-2 text-left text-sm font-medium">Address</th>
+                  <th scope="col" className="px-4 py-2 text-left text-sm font-medium">Last Donate</th>
+                  <th scope="col" className="px-4 py-2 text-left text-sm font-medium">Weight</th>
+                  <th scope="col" className="px-4 py-2 text-left text-sm font-medium">Mobile</th>
+                  <th scope="col" className="px-4 py-2 text-left text-sm font-medium">Physical Problem</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="bg-white divide-y divide-gray-200">
                 {searchResults.map((donor, index) => (
-                  <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                    <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
-                    <td className="border border-gray-300 px-4 py-2">{donor.name}</td>
-                    <td className="border border-gray-300 px-4 py-2">{donor.bloodGroup}</td>
-                    <td className="border border-gray-300 px-4 py-2">{donor.district}</td>
-                    <td className="border border-gray-300 px-4 py-2">{donor.subDistrict}</td>
+                  <tr key={index} className={index % 2 === 0 ? 'bg-gray-100' : 'bg-white'}>
+                    <td className="px-4 py-2 whitespace-nowrap">{index + 1}</td>
+                    <td className="px-4 py-2 whitespace-nowrap">{donor.name}</td>
+                    <td className="px-4 py-2 whitespace-nowrap">{donor.bloodGroup}</td>
+                    <td className="px-4 py-2 whitespace-nowrap">{donor.age}</td>
+                    <td className="px-4 py-2 whitespace-nowrap">{donor.district}</td>
+                    <td className="px-4 py-2 whitespace-nowrap">{donor.subDistrict}</td>
+                    <td className="px-4 py-2 whitespace-nowrap">{donor.address}</td>
+                    <td className="px-4 py-2 whitespace-nowrap">{formatLastDonationDate(donor.lastDonationDate)}</td>
+                    <td className="px-4 py-2 whitespace-nowrap">{donor.weight}</td>
+                    <td className="px-4 py-2 whitespace-nowrap">{donor.mobile}</td>
+                    <td className="px-4 py-2 whitespace-nowrap">{physicalProblemOrNot(donor.hasPhysicalProblem)}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        )}
+        </div>
+      )}
 
-        {searched && searchResults.length === 0 && (
-          <p className="text-center mt-4">No donors found.</p>
-        )}
-      </div>
+      {searched && searchResults.length === 0 && (
+        <p className="text-center mt-4">No donors found.</p>
+      )}
+    </div>
     </>
   );
 };
 
 export default BloodNeedForm;
+

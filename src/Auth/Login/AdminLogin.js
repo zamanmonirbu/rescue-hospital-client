@@ -1,91 +1,61 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../Firebase/app.config";
+// AdminLogin.js
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+// import { apiContext } from '../../App';
+import { isAdminAuthenticated, loginAdmin } from './AdminAuth';
+import { apiContext } from '../../App';
 
 const AdminLogin = () => {
-  const Navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const handleAdminLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
-      const adminRef = doc(db, "admins", user.uid);
-      const adminSnapshot = await getDoc(adminRef);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const [verifyUser, setVerifyUser] = useContext(apiContext);
+  
 
-      if (adminSnapshot.exists()) {
-        const adminData = adminSnapshot.data();
-        if (adminData) {
-          localStorage.setItem("adminInfo", JSON.stringify(adminData));
-          Navigate("/admin/page");
-        }
-      }
-    } catch (error) {
-      console.error("Error during admin login: ", error);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const isAuthenticated = await loginAdmin(username, password);
+    console.log(isAuthenticated);
+    if (isAuthenticated) {
+      setVerifyUser(isAdminAuthenticated);
+      console.log("working",isAdminAuthenticated())
+      navigate('/admin/page');
+    } else {
+      setError('Invalid credentials, please try again.');
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-200">
-      <div className="bg-white p-8 rounded shadow-md">
-        <h2 className="text-2xl font-bold mb-8 text-center">Login</h2>
-
-        <form onSubmit={handleAdminLogin}>
-          <div className="flex mb-4">
-            <div className="w-1/2 pr-2">
-              <label
-                htmlFor="loginEmail"
-                className="block text-sm font-medium text-gray-600"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="loginEmail"
-                name="email"
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Enter your email"
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                }}
-              />
-            </div>
-
-            <div className="w-1/2 pl-2">
-              <label
-                htmlFor="loginPassword"
-                className="block text-sm font-medium text-gray-600"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                id="loginPassword"
-                name="password"
-                className="mt-1 p-2 w-full border rounded-md"
-                placeholder="Enter your password"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-            </div>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="p-6 bg-white rounded-md shadow-md">
+        <h2 className="text-2xl font-bold mb-4">Admin Login</h2>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
+        <form onSubmit={handleLogin}>
+          <div className="mb-4">
+            <label className="block text-sm font-medium">Username</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+              required
+            />
           </div>
-
-          <button
-            type="submit"
-            className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600"
-          >
-            Login As Admin
+          <div className="mb-4">
+            <label className="block text-sm font-medium">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+              required
+            />
+          </div>
+          <button type="submit" className="w-full py-2 bg-blue-600 text-white rounded-md">
+            Login
           </button>
         </form>
-        <hr className="my-6" />
       </div>
     </div>
   );
