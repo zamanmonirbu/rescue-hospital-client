@@ -63,6 +63,7 @@ const AppointmentFinal = () => {
         patientName: appointmentDetails.patientName,
         age: appointmentDetails.age,
         doctorId: doctorId,
+        doctorName: doctorInfo.name,
         patientId: user.uid,
       };
 

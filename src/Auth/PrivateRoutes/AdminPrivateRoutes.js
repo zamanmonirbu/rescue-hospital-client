@@ -6,8 +6,7 @@ const AdminPrivateRoutes = () => {
   const location = useLocation();
   const [verifyUser]= useContext(apiContext);
 
-  // const verifyAdmin = true;
-console.log("hello",verifyUser)
+// console.log("hello",verifyUser)
   return (
     <div>
       {verifyUser?.isAdmin ? (

@@ -40,12 +40,13 @@ const Navbar = () => {
 
             {
             user?.photoURL ?(
-              <img
-                src={user?.photoURL}
-                alt="navImage"
-                className="h-6 w-6 rounded-full"
-                title="User Profile"
-              />
+             <Link to={`user/profile/${user.uid}`}> 
+                <img
+             src={user?.photoURL}
+             alt="navImage"
+             className="h-6 w-6 rounded-full"
+             title="User Profile"
+           /></Link>
             ) :  (
               <div>
                 <Link

@@ -1,13 +1,9 @@
-// AdminAuth.js
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../Firebase/app.config';
 
 export const loginAdmin = async (username, password) => {
   try {
-    // Reference to the admins collection
     const adminsRef = collection(db, 'admin');
-    // console.log("Admin Data",adminsRef);
-    // Query to find the admin by username
     const q = query(adminsRef, where('username', '==', username));
     const querySnapshot = await getDocs(q);
     
@@ -15,9 +11,8 @@ export const loginAdmin = async (username, password) => {
       const adminDoc = querySnapshot.docs[0];
       const adminData = adminDoc.data();
       console.log(adminData);
-      // Check password (plain text comparison)
-      if (password === adminData.password) {
-        // Store admin details securely
+    
+      if (password === adminData.password &&adminData.isAdmin ) {
         localStorage.setItem('adminDetails', JSON.stringify({
           id: adminDoc.id,
           username: adminData.username,

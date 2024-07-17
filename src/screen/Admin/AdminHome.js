@@ -22,7 +22,7 @@ const Admin = () => {
   const handleLogOut = () => {
     signOut(auth)
       .then(() => {
-        localStorage.removeItem("userDetails");
+        localStorage.removeItem("adminDetails");
         navigate("/");
         window.location.reload();
       })
