@@ -7,9 +7,11 @@ import { loadStripe } from "@stripe/stripe-js";
 import { baseUrl } from "../../../BaseURL";
 
 
-const stripePromise = loadStripe("pk_test_51OQBiWIHoIMM5DdUn2CP9cXfVmKs8Ga09vvkLPNhUpF3nm2lbkeqCLMsLS2Ya7pAUkWD3fF0n8m3sXDb7F76uHaO00OhnrgO83");
+
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 const AppointmentFinal = () => {
+  // console.log(process.env.REACT_APP_STRIPE_KEY)
   const navigate = useNavigate();
   const [user] = useContext(apiContext);
   const [appointmentDetails, setAppointmentDetails] = useState({
