@@ -23,6 +23,7 @@ import DonationForm from "./component/BloodDonation/DonationForm";
 import BloodNeedForm from "./component/BloodDonation/BloodNeedForm ";
 import UserProfile from "./component/UserProfile/UserProfile";
 import VisitUserProfile from "./component/UserProfile/VisitUserProfile";
+import PaymentSuccess from "./component/PaymentSuccess/PaymentSuccess";
 
 export const apiContext = createContext();
 
@@ -42,7 +43,7 @@ function App() {
       setVerifyUser(parsedAdmin);
     }
   }, [setVerifyUser]);
-
+console.log()
   return (
     <div className="App">
       <apiContext.Provider value={[verifyUser, setVerifyUser]}>
@@ -60,6 +61,7 @@ function App() {
           <Route path="/blood/need" element={<BloodNeedForm />} />
           <Route path="visit/user/profile/:uid" element={<VisitUserProfile/> } />
           <Route path="/test" element={<Test />} />
+          <Route path="/success" element={<PaymentSuccess />} />
 
           <Route element={<UserPrivateRoutes />}>
             <Route path="/appointment" element={<Appointment />} />

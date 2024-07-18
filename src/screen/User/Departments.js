@@ -25,7 +25,7 @@ const Departments = () => {
         </header>
         <div className=" flex flex-wrap flex-row -mx-4 text-center">
           <div
-            className="rounded-xl flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp"
+            className="rounded-xl flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp" title="Click to Explore"
             data-wow-duration="1s"
             style={{
               visibility: "visible",
@@ -57,7 +57,7 @@ const Departments = () => {
             </Link>
           </div>
           <div
-            className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp"
+            className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp" title="Click to Explore"
             data-wow-duration="1s"
             style={{
               visibility: "visible",
@@ -90,7 +90,7 @@ const Departments = () => {
             </Link>
           </div>
           <div
-            className=" flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp"
+            className=" flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp" title="Click to Explore"
             data-wow-duration="1s"
             style={{
               visibility: "visible",
@@ -122,7 +122,7 @@ const Departments = () => {
             </Link>
           </div>
           <div
-            className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp"
+            className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp" title="Click to Explore"
             data-wow-duration="1s"
             style={{
               visibility: "visible",
@@ -155,7 +155,7 @@ const Departments = () => {
             </Link>
           </div>
           <div
-            className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp"
+            className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp" title="Click to Explore"
             data-wow-duration="1s"
             style={{
               visibility: "visible",
@@ -187,7 +187,7 @@ const Departments = () => {
             </Link>
           </div>
           <div
-            className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp"
+            className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp" title="Click to Explore"
             data-wow-duration="1s"
             style={{
               visibility: "visible",

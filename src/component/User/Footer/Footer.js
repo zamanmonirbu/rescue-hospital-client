@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -16,8 +17,8 @@ const Footer = () => {
                   alt="hello"
                 />
                 <div class="text-left ml-3">
-                  <p class="text-xs text-gray-200">Download on </p>
-                  <p class="text-sm md:text-base"> Google Play Store </p>
+                  <p class="text-xs text-gray-200"><Link to={"#"}>Download on</Link>  </p>
+                  <p class="text-sm md:text-base"> <Link to={"#"}> Google Play Store</Link> </p>
                 </div>
               </div>
               <div class="flex items-center border  rounded-lg px-4 py-2 w-44 mx-2">
@@ -27,8 +28,8 @@ const Footer = () => {
                   alt="hello"
                 />
                 <div class="text-left ml-3">
-                  <p class="text-xs text-gray-200">Download on </p>
-                  <p class="text-sm md:text-base"> Apple Store </p>
+                  <p class="text-xs text-gray-200"><Link to={"#"}>Download on</Link> </p>
+                  <p class="text-sm md:text-base"><Link to={"#"}>Apple Store</Link>  </p>
                 </div>
               </div>
             </div>
@@ -36,12 +37,13 @@ const Footer = () => {
           <div class="mt-28 flex flex-col md:flex-row md:justify-between items-center text-sm text-gray-400">
             <p class="order-2 md:order-1 mt-8 md:mt-0">
               {" "}
-              &copy;Rescue Hospital, 2024.{" "}
+              <Link to={"#"}>
+              &copy;Rescue Hospital, 2024. </Link>{" "}
             </p>
             <div class="order-1 md:order-2">
-              <span class="px-2">About us</span>
-              <span class="px-2 border-l">Contact us</span>
-              <span class="px-2 border-l">Privacy Policy</span>
+              <span class="px-2"><Link to={"#"}>About us</Link></span>
+              <span class="px-2 border-l"><Link to={"#"}>Contact us</Link></span>
+              <span class="px-2 border-l"><Link to={"#"}>Privacy Policy</Link></span>
             </div>
           </div>
         </div>

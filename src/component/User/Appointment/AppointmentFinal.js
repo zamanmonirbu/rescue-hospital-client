@@ -3,9 +3,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { doc, getDoc, collection, addDoc } from "firebase/firestore";
 import { db } from "../../../Auth/Firebase/app.config";
 import { apiContext } from "../../../App";
+import { loadStripe } from "@stripe/stripe-js";
+import { baseUrl } from "../../../BaseURL";
+
+
+const stripePromise = loadStripe("pk_test_51OQBiWIHoIMM5DdUn2CP9cXfVmKs8Ga09vvkLPNhUpF3nm2lbkeqCLMsLS2Ya7pAUkWD3fF0n8m3sXDb7F76uHaO00OhnrgO83");
 
 const AppointmentFinal = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [user] = useContext(apiContext);
   const [appointmentDetails, setAppointmentDetails] = useState({
     date: "",
@@ -68,13 +73,48 @@ const AppointmentFinal = () => {
       };
 
       const appointmentsCollectionRef = collection(db, "appointments");
-      const saveAppointment=await addDoc(appointmentsCollectionRef, appointmentData);
-      if(saveAppointment.id){
-        alert("Appointment Successfully Done")
+      const saveAppointment = await addDoc(appointmentsCollectionRef, appointmentData);
+      if (saveAppointment.id) {
+        alert("Appointment Successfully Done");
         navigate('/');
       }
     } catch (error) {
       console.error("Error saving appointment: ", error);
+    }
+  };
+
+  const handleAppointmentNow = async () => {
+    try {
+      const appointmentData = {
+        date: selectedDate,
+        time: workingHours ? `${workingHours.from} - ${workingHours.to}` : "",
+        address: appointmentDetails.address,
+        patientName: appointmentDetails.patientName,
+        age: appointmentDetails.age,
+        doctorId: doctorId,
+        doctorName: doctorInfo.name,
+        patientId: user.uid,
+      };
+
+      const stripe = await stripePromise;
+      const response = await fetch(`${baseUrl}/create-checkout-session`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ appointmentData }),
+      });
+
+      const session = await response.json();
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (result.error) {
+        // console.error(result.error.message);
+      }
+    } catch (error) {
+      console.error("Error during payment process: ", error);
     }
   };
 
@@ -174,9 +214,16 @@ const AppointmentFinal = () => {
         <button
           type="button"
           className="bg-gray-700 hover:bg-emerald-500 text-white font-bold py-2 px-6 border border-emerald-500 rounded-3xl"
+          onClick={handleAppointmentNow}
+        >
+          Confirm Appointment by Payment
+        </button>
+        <button
+          type="button"
+          className="bg-gray-700 hover:bg-emerald-500 text-white font-bold py-2 px-6 border border-emerald-500 rounded-3xl"
           onClick={handleAppointmentSubmit}
         >
-          Confirm Appointment
+          Skip Payment  
         </button>
       </form>
     </div>
