@@ -35,5 +35,4 @@ export const isAdminAuthenticated = () => {
 
 export const logoutAdmin = () => {
   localStorage.removeItem('adminDetails');
-  
 };

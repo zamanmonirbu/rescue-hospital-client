@@ -10,34 +10,9 @@ const RegistrationPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error,setError]=useState(false)
+  const [error, setError] = useState(false);
 
-  // const [formData, setFormData] = useState({
-  //   firstName: '',
-  //   lastName: '',
-  //   email: '',
-  //   password: '',
-  // });
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await axios.post('YOUR_BACKEND_ENDPOINT', formData);
-  //     if (response.status === 200) {
-  //       console.log('Registration successful');
-  //     } else {
-  //       console.error('Registration failed');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error during registration:', error);
-  //   }
-  // };
-  // const handleInputChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
-
-  const handleCreateAccountByGoogle = (e) => {
+  const handleCreateAccount = (e) => {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -47,75 +22,50 @@ const RegistrationPage = () => {
         }
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        setError(true)
+        console.error("Error:", error.code, error.message);
+        setError(true);
       });
   };
 
   return (
     <>
       <Navbar />
-      <div className="flex items-center justify-center min-h-screen bg-gray-300">
-        <div className="bg-white p-8 rounded shadow-md">
-        {error && <Error/>}
-          <h2 className="text-2xl font-bold mb-8 text-center ">
-            Registration Form
-          </h2>
-          <form onSubmit={handleCreateAccountByGoogle}>
-          <div className="flex mb-4">
-              <div className="w-1/2 pr-2">
-                <label
-                  htmlFor="loginEmail"
-                  className="block text-sm font-medium text-gray-600"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="loginEmail"
-                  name="email"
-                  className="mt-1 p-2 w-full border rounded-md"
-                  placeholder="Enter your email"
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
-              </div>
-
-              <div className="w-1/2 pl-2">
-                <label
-                  htmlFor="loginPassword"
-                  className="block text-sm font-medium text-gray-600"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  id="loginPassword"
-                  name="password"
-                  className="mt-1 p-2 w-full border rounded-md"
-                  placeholder="Enter your password"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                />
-              </div>
+      <div className="flex items-center justify-center min-h-screen bg-gray-200">
+        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+          {error && <Error />}
+          <h2 className="text-2xl font-bold mb-8 text-center">Registration Form</h2>
+          <form onSubmit={handleCreateAccount}>
+            <div className="mb-4">
+              <label htmlFor="registerEmail" className="block text-sm font-medium text-gray-600">Email</label>
+              <input
+                type="email"
+                id="registerEmail"
+                name="email"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Enter your email"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
-          
-            <button
-              type="submit"
-              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-            >
+            <div className="mb-4">
+              <label htmlFor="registerPassword" className="block text-sm font-medium text-gray-600">Password</label>
+              <input
+                type="password"
+                id="registerPassword"
+                name="password"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                placeholder="Enter your password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit" className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700">
               Register
             </button>
           </form>
           <p className="mt-4 text-sm text-gray-600">
             Already have an account?{" "}
-            <a href="/user/login" className="text-blue-500 hover:underline">
-              SignIn
-            </a>
+            <a href="/user/login" className="text-blue-500 hover:underline">Sign In</a>
           </p>
         </div>
       </div>

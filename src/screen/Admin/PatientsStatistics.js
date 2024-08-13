@@ -1,48 +1,13 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import CanvasJSReact from '@canvasjs/react-charts';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from "../../Auth/Firebase/app.config";
 
 const PatientsStatistics = () => {
   const chartRef = useRef(null);
-  const [dataPoints, setDataPoints] = useState([
-    { label: "Admins", y: 0 },
-    { label: "Doctor", y: 0 },
-    { label: "Patients", y: 0 },
-  ]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const adminsCollection = collection(db, "admin");
-        const doctorsCollection = collection(db, "doctors");
-        const patientsCollection = collection(db, "appointments"); 
-
-        const [adminsSnapshot, doctorsSnapshot, patientsSnapshot] = await Promise.all([
-          getDocs(adminsCollection),
-          getDocs(doctorsCollection),
-          getDocs(patientsCollection),
-        ]);
-
-        const adminsCount = adminsSnapshot.size;
-        const doctorsCount = doctorsSnapshot.size;
-        const patientsCount = patientsSnapshot.size;
-
-        setDataPoints([
-          { label: "Admins", y: adminsCount },
-          { label: "Doctor", y: doctorsCount },
-          { label: "Patients", y: patientsCount },
-        ]);
-
-        if (chartRef.current) {
-          chartRef.current.render();
-        }
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      }
-    };
-
-    fetchData();
+    if (chartRef.current) {
+      chartRef.current.render();
+    }
   }, []);
 
   const toggleDataSeries = (e) => {
@@ -59,10 +24,10 @@ const PatientsStatistics = () => {
     theme: "light2",
     animationEnabled: true,
     title: {
-      text: "Summary Of Rescue Hospital"
+      text: "Patients Statistics"
     },
     subtitles: [{
-      text: "Show all info"
+      text: "Click Legend to Hide or Unhide Data Series"
     }],
     axisX: {
       title: "Categories"
@@ -83,9 +48,13 @@ const PatientsStatistics = () => {
     },
     data: [{
       type: "column",
-      name: "Total",
+      name: "Total Patients",
       showInLegend: true,
-      dataPoints: dataPoints
+      dataPoints: [
+        { label: "Category 1", y: 50 },
+        { label: "Category 2", y: 75 },
+        { label: "Category 3", y: 100 },
+      ]
     }]
   };
 

@@ -89,7 +89,7 @@ const DoctorsByAdmin = () => {
             </p>
             <span>
               <Link to={`/admin/edit/doctor/info/${doctor.id}`}>
-                <button class="bg-gray-700 hover:bg-emerald-500 text-white font-bold py-2 px-6 border border-emerald-500 rounded-3xl mr-3">
+                <button className="bg-gray-700 hover:bg-emerald-500 text-white font-bold py-2 px-6 border border-emerald-500 rounded-3xl mr-3">
                   Edit Info
                 </button>
               </Link>
@@ -98,7 +98,7 @@ const DoctorsByAdmin = () => {
                 onClick={() => {
                   handleDeleteDoctor(doctor.id);
                 }}
-                class="bg-gray-700 hover:bg-emerald-500 text-white font-bold py-2 px-6 border border-emerald-500 rounded-3xl mr-3"
+                className="bg-gray-700 hover:bg-emerald-500 text-white font-bold py-2 px-6 border border-emerald-500 rounded-3xl mr-3"
               >
                 Delete
               </button>

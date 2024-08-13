@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { apiContext } from "../../../App";
 import userImg from '../../../component/assets/images/profile.png'
 import admin from '../../../component/assets/images/admin.png'
+import drImg from '../../../component/assets/images/doctor.png'
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,6 +12,7 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
 
   return (
     <nav className="bg-gray-900 ">
@@ -34,17 +37,19 @@ const Navbar = () => {
             <Link to="/show/doctors" className="text-gray-300 hover:text-white">
               Doctors
             </Link>
+            {! user?.photoURL &&
             <Link to="/admin/page" className="text-gray-300 hover:text-white">
             <img src={admin} alt="" className="h-8 w-8 rounded-full"  title="Admin Profile" />
             </Link>
-
+            }
+            
             {
             user?.photoURL ?(
-             <Link to={`/user/profile/${user.uid}`}> 
+             <Link to={`user/profile/${user?.uid}`}> 
                 <img
              src={user?.photoURL}
              alt="navImage"
-             className="h-8 w-8 rounded-full"
+             className="h-6 w-6 rounded-full"
              title="User Profile"
            /></Link>
             ) :  (
@@ -55,15 +60,16 @@ const Navbar = () => {
                 >
                   <img src={userImg} alt="" className="h-8 w-8 rounded-full"  title="User Profile" />
                 </Link>
-                {/* {" "}
-                <Link
-                  to="/user/register"
-                  className="text-gray-300 hover:text-white"
-                >
-                  Register
-                </Link> */}
               </div>
             )}
+
+            {! user?.photoURL &&
+          ( <Link to="/doctor/login" className="text-gray-300 hover:text-white">
+           <img src={drImg} alt="" className="h-8 w-8 rounded-full"  title="Doctor Profile" />
+     </Link>)
+           
+            }
+
           </div>
           <div className="md:hidden">
             <button

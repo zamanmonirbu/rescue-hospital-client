@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Auth/Firebase/app.config";
+import { Link } from "react-router-dom";
 
 const ShowAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -74,7 +75,7 @@ const ShowAppointments = () => {
               className="mb-4 p-4 border rounded-md shadow-md bg-slate-50"
             >
               <p>
-                <strong>Name:</strong> {appointment.patientName},
+                <strong>Name:</strong> <Link to={`/visit/user/profile/${appointment.patientId}`}>{appointment.patientName}</Link>,
               </p>
               <p>
                 <strong>Date:</strong> {appointment.date},

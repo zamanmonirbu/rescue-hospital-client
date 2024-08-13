@@ -5,7 +5,7 @@ import { Outlet, useLocation, Navigate } from 'react-router-dom';
 const PrivateRoutes = () => {
     const location=useLocation();
     const [user]= useContext(apiContext);
-    console.log(user)
+    // console.log(user)
     return (
         <div>
           {

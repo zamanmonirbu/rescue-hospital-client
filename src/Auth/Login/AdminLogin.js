@@ -1,9 +1,8 @@
-// AdminLogin.js
 import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-// import { apiContext } from '../../App';
+import { useNavigate } from 'react-router-dom';
 import { isAdminAuthenticated, loginAdmin } from './AdminAuth';
 import { apiContext } from '../../App';
+import Navbar from '../../component/User/Navbar/Navbar';
 
 const AdminLogin = () => {
   const [username, setUsername] = useState('');
@@ -11,55 +10,56 @@ const AdminLogin = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const [verifyUser, setVerifyUser] = useContext(apiContext);
-  
 
   const handleLogin = async (e) => {
     e.preventDefault();
     const isAuthenticated = await loginAdmin(username, password);
-    console.log(isAuthenticated);
     if (isAuthenticated) {
       setVerifyUser(isAdminAuthenticated);
-      console.log("working",isAdminAuthenticated())
       navigate('/admin/page');
     } else {
       setError('Invalid credentials, please try again.');
     }
   };
+  console.log(verifyUser);
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="p-10 bg-gray-200 rounded-md shadow-md">
-      <Link to={'/'} className='p-2  bg-green-400 rounded-xl flex items-center justify-center '>Go Home</Link>
-
-        <h2 className="text-2xl font-bold mb-4 my-10">Admin Login</h2>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        <form onSubmit={handleLogin}>
-          <div className="mb-4">
-            <label className="block text-sm font-medium">Username</label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="mt-1 block w-full px-6 py-2 border border-gray-300 rounded-md"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 block w-full px-6 py-2 border border-gray-300 rounded-md"
-              required
-            />
-          </div>
-          <button type="submit" className="w-full py-2 bg-blue-600 text-white rounded-md">
-            Login
-          </button>
-        </form>
+    <>
+      <Navbar />
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+          <h2 className="text-2xl font-bold mb-4 text-center">Admin Login</h2>
+          {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
+          <form onSubmit={handleLogin}>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-600">Username</label>
+              <input
+                type="text"
+                value={username}
+                placeholder="Enter your email"
+                onChange={(e) => setUsername(e.target.value)}
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-600">Password</label>
+              <input
+                type="password"
+                value={password}
+                placeholder="Enter your password"
+                onChange={(e) => setPassword(e.target.value)}
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+                required
+              />
+            </div>
+            <button type="submit" className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+              Login
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

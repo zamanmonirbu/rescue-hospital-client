@@ -5,7 +5,8 @@ import { apiContext } from "../../App";
 const AdminPrivateRoutes = () => {
   const location = useLocation();
   const [verifyUser]= useContext(apiContext);
-  console.log(verifyUser)
+
+// console.log("hello",verifyUser)
   return (
     <div>
       {verifyUser?.isAdmin ? (
