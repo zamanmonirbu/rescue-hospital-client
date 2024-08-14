@@ -3,8 +3,10 @@ import axios from 'axios'; // Import axios for making HTTP requests
 import bdDistricts from './bdDistricts';
 import Navbar from '../User/Navbar/Navbar';
 import { baseUrl } from '../../BaseURL';
+import { useNavigate } from 'react-router-dom';
 
 const DonationForm = () => {
+  const navigate=useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     bloodGroup: '',
@@ -37,7 +39,12 @@ const DonationForm = () => {
     event.preventDefault();
     console.log(formData);  
     try {
-      await axios.post(`${baseUrl}/api/donation`, formData); 
+      const submittedData=await axios.post(`${baseUrl}/api/donation`, formData); 
+      console.log(submittedData);
+      if(submittedData){
+        alert("Your data submitted Successfully");
+        navigate('/')
+      }
     } catch (error) {
       console.error('Error submitting donation:', error);
     }
