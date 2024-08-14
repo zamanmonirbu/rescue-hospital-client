@@ -45,7 +45,7 @@ const Navbar = () => {
             
             {
             user?.photoURL ?(
-             <Link to={`user/profile/${user?.uid}`}> 
+             <Link to={`/user/profile/${user?.uid}`}> 
                 <img
              src={user?.photoURL}
              alt="navImage"
