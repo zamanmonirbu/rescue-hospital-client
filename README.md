@@ -5,6 +5,19 @@
 ## Overview:
 Rescue Hospital is a patient appointment system that simplifies the appointment process for users, providing an efficient admin panel for hospital management and a doctor's dashboard for viewing appointment details.
 
+## Login Credentials
+
+### User Login
+ - **Username:** user@gmail.com
+ - **Password:** 12345
+### Admin Login
+ - **Username:** admin@gmail.com
+ - **Password:** 12345
+### Doctor Login
+ - **Username:** doctor@gmail.com
+ - **Password:** 12345
+
+
 ## Features
 
 ### 1. Doctor Information
