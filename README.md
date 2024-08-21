@@ -9,7 +9,7 @@ Rescue Hospital is a patient appointment system that simplifies the appointment 
 
 ### User Login
  - **Username:** user@gmail.com
- - **Password:** 12345
+ - **Password:** 12345user
 ### Admin Login
  - **Username:** admin@gmail.com
  - **Password:** 12345
