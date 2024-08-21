@@ -37,21 +37,24 @@ const Navbar = () => {
             <Link to="/show/doctors" className="text-gray-300 hover:text-white">
               Doctors
             </Link>
-            {! user?.photoURL &&
+            
             <Link to="/admin/page" className="text-gray-300 hover:text-white">
             <img src={admin} alt="" className="h-8 w-8 rounded-full"  title="Admin Profile" />
             </Link>
-            }
+            
             
             {
-            user?.photoURL ?(
+            user?(
              <Link to={`/user/profile/${user?.uid}`}> 
-                <img
-             src={user?.photoURL}
-             alt="navImage"
-             className="h-6 w-6 rounded-full"
-             title="User Profile"
-           /></Link>
+             
+              {user?.photoURL? (<img
+              src={user?.photoURL}
+              alt="navImage"
+              className="h-6 w-6 rounded-full"
+              title="User Profile"
+            />):<p className="text-black rounded-xl bg-slate-100 p-2">User Dashboard</p>}
+             
+               </Link>
             ) :  (
               <div>
                 <Link
@@ -63,12 +66,10 @@ const Navbar = () => {
               </div>
             )}
 
-            {! user?.photoURL &&
-          ( <Link to="/doctor/login" className="text-gray-300 hover:text-white">
+          
+           <Link to="/doctor/login" className="text-gray-300 hover:text-white">
            <img src={drImg} alt="" className="h-8 w-8 rounded-full"  title="Doctor Profile" />
-     </Link>)
-           
-            }
+     </Link>
 
           </div>
           <div className="md:hidden">
